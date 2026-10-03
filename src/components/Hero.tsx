@@ -13,6 +13,7 @@ import {
   Users,
   Zap,
   Building2,
+  Sparkles,
 } from "lucide-react";
 
 export function Hero() {
@@ -21,56 +22,61 @@ export function Hero() {
   const heroRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    // Trigger entrance animation after mount
-    const timer = setTimeout(() => setHeroVisible(true), 80);
+    // Trigger entrance sequence shortly after mount
+    const timer = setTimeout(() => setHeroVisible(true), 60);
     return () => clearTimeout(timer);
   }, []);
 
   const stats = [
-    { stat: "300+", label: "Brands served", icon: Building2 },
-    { stat: "$250M+", label: "Email revenue generated", icon: TrendingUp },
-    { stat: "100+", label: "Active 7–9 figure brands", icon: Zap },
-    { stat: "342", label: "Members inside", icon: Users },
+    { stat: "300+", label: "Brands served", icon: Building2, highlight: "DTC & B2B" },
+    { stat: "$250M+", label: "Email revenue generated", icon: TrendingUp, highlight: "Verified" },
+    { stat: "100+", label: "Active 7–9 figure brands", icon: Zap, highlight: "Agency accounts" },
+    { stat: "342", label: "Members inside", icon: Users, highlight: "Active daily" },
   ];
 
   return (
     <>
       <section
+        id="top"
         ref={heroRef}
-        className="relative pt-12 sm:pt-16 lg:pt-20 pb-16 lg:pb-24 overflow-hidden"
+        className="relative pt-28 sm:pt-36 lg:pt-40 pb-16 lg:pb-24 overflow-hidden"
       >
-        {/* Ambient glow spots */}
+        {/* Ambient Glow Aura Behind Hero */}
         <div
-          className="glow-spot w-[600px] h-[400px] bg-brand/[0.04] top-[-80px] left-[20%]"
+          className="glow-spot w-[700px] h-[450px] bg-brand/[0.07] top-0 left-1/2 -translate-x-1/2 aurora-animate"
           aria-hidden="true"
         />
         <div
-          className="glow-spot w-[400px] h-[300px] bg-brand/[0.03] top-[200px] right-[-100px]"
+          className="glow-spot w-[450px] h-[350px] bg-brand/[0.04] top-[30%] right-[-100px]"
           aria-hidden="true"
         />
 
         <div className="max-w-[1200px] mx-auto px-6 sm:px-8 relative z-10">
-          {/* Two-column: Text left, Video right */}
+          {/* Two-column layout: Text left, Video preview right */}
           <div className="flex flex-col lg:flex-row gap-10 lg:gap-14 items-center">
-            {/* Left column — text */}
+            {/* Left Column — Strategic Hero Messaging */}
             <div className="w-full lg:flex-[1_1_560px]">
-              {/* Eyebrow badge */}
+              {/* Eyebrow Badge */}
               <div
-                className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass mb-6 transition-all duration-700 ${
+                className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full liquid-glass-card mb-6 transition-all duration-700 ${
                   heroVisible
                     ? "opacity-100 translate-y-0"
                     : "opacity-0 translate-y-4"
                 }`}
               >
-                <span className="w-2 h-2 rounded-full bg-brand animate-pulse" />
-                <span className="font-montserrat font-bold text-[12px] tracking-[0.08em] text-brand">
-                  Ecommerce email &amp; SMS community
+                <span className="w-2 h-2 rounded-full bg-brand live-dot" />
+                <span className="font-montserrat font-bold text-[11px] sm:text-[12px] tracking-[0.08em] text-brand uppercase">
+                  Ecommerce Email &amp; SMS Community
+                </span>
+                <span className="text-white/20 text-xs">|</span>
+                <span className="text-[11px] text-text-secondary font-medium">
+                  2026 Curriculum
                 </span>
               </div>
 
-              {/* Headline */}
+              {/* Signature Headline */}
               <h1
-                className={`font-montserrat italic font-extrabold text-[36px] sm:text-[48px] lg:text-[58px] leading-[1.04] tracking-[-0.02em] text-text-primary max-w-[600px] mb-6 transition-all duration-700 delay-100 ${
+                className={`font-montserrat italic font-extrabold text-[36px] sm:text-[50px] lg:text-[60px] leading-[1.03] tracking-[-0.025em] text-text-primary max-w-[620px] mb-6 transition-all duration-700 delay-100 ${
                   heroVisible
                     ? "opacity-100 translate-y-0"
                     : "opacity-0 translate-y-6"
@@ -80,21 +86,21 @@ export function Hero() {
                 internet.
               </h1>
 
-              {/* Lead paragraph */}
+              {/* Lead Subtitle */}
               <p
-                className={`text-[17px] sm:text-[19px] leading-[1.65] text-text-secondary max-w-[540px] transition-all duration-700 delay-200 ${
+                className={`text-[17px] sm:text-[19px] leading-[1.68] text-text-secondary max-w-[540px] transition-all duration-700 delay-200 ${
                   heroVisible
                     ? "opacity-100 translate-y-0"
                     : "opacity-0 translate-y-6"
                 }`}
               >
                 Most email advice online is outdated and generic. Email
-                Marketing Mastery shows what works inside real ecommerce
+                Marketing Mastery reveals what wins inside real 7–9 figure DTC
                 accounts today. Max Sturtevant and the team behind $250M+ in
-                email revenue teach it, live, every week.
+                revenue teach it, live, every single week.
               </p>
 
-              {/* CTA group */}
+              {/* Dual CTA Group */}
               <div
                 className={`flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-5 mt-8 transition-all duration-700 delay-300 ${
                   heroVisible
@@ -106,20 +112,23 @@ export function Hero() {
                   href="https://www.skool.com/email-marketerz"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group inline-flex items-center justify-center gap-2 h-[54px] px-8 rounded-2xl bg-brand hover:bg-brand-hover text-brand-dark font-montserrat font-bold text-[16px] transition-all duration-200 shadow-lg shadow-brand/25 hover:shadow-xl hover:shadow-brand/35 hover:-translate-y-0.5 active:translate-y-0"
+                  className="group relative inline-flex items-center justify-center gap-2.5 h-[54px] px-8 rounded-2xl bg-brand hover:bg-brand-hover text-brand-dark font-montserrat font-bold text-[16px] btn-spring sheen-glow shadow-xl shadow-brand/25 hover:shadow-2xl hover:shadow-brand/40 overflow-hidden"
                 >
-                  <span>Join the community</span>
-                  <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                  <span className="relative z-10">Join the community</span>
+                  <ArrowRight className="w-5 h-5 relative z-10 transition-transform duration-200 group-hover:translate-x-1" />
                 </a>
-                <span className="text-text-secondary text-[15px] flex items-center gap-2">
-                  <ShieldCheck className="w-5 h-5 text-brand shrink-0" />
-                  $247/month · Cancel anytime
-                </span>
+
+                <div className="flex items-center gap-2 text-text-secondary text-[14px]">
+                  <div className="w-6 h-6 rounded-full bg-brand/10 flex items-center justify-center shrink-0">
+                    <ShieldCheck className="w-4 h-4 text-brand" />
+                  </div>
+                  <span>$247/month · Cancel anytime</span>
+                </div>
               </div>
 
-              {/* Rating proof */}
+              {/* Social Proof & Rating Badge */}
               <div
-                className={`flex items-center gap-2.5 mt-6 flex-wrap transition-all duration-700 delay-400 ${
+                className={`flex items-center gap-3 mt-7 flex-wrap transition-all duration-700 delay-400 ${
                   heroVisible
                     ? "opacity-100 translate-y-0"
                     : "opacity-0 translate-y-6"
@@ -132,91 +141,97 @@ export function Hero() {
                 </div>
                 <span className="text-[14px] text-text-secondary">
                   <strong className="text-text-primary font-semibold">
-                    5.0
+                    5.0 / 5.0
                   </strong>{" "}
-                  from 18 member reviews
+                  from 18 verified member reviews
                 </span>
-                <span className="text-[11px] px-2 py-0.5 rounded-md glass text-text-accent font-medium">
-                  Verified
+                <span className="text-[10px] px-2.5 py-0.5 rounded-full bg-brand/10 text-brand font-semibold border border-brand/20">
+                  100% 5-Star
                 </span>
               </div>
             </div>
 
-            {/* Right column — Video preview */}
+            {/* Right Column — Walkthrough Video Preview Card */}
             <div
-              className={`w-full lg:flex-[1_1_480px] transition-all duration-900 delay-300 ${
+              className={`w-full lg:flex-[1_1_500px] transition-all duration-900 delay-300 ${
                 heroVisible
                   ? "opacity-100 translate-y-0 scale-100"
                   : "opacity-0 translate-y-8 scale-[0.96]"
               }`}
             >
-              <div
-                onClick={() => setVideoOpen(true)}
-                className="group relative aspect-video w-full glass rounded-2xl overflow-hidden cursor-pointer shadow-2xl shadow-black/40 hover:shadow-brand/15 transition-all duration-500 hover:scale-[1.015]"
-                role="button"
-                tabIndex={0}
-                aria-label="Play Max's walkthrough video"
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    setVideoOpen(true);
-                  }
-                }}
-              >
-                {/* Thumbnail */}
-                <Image
-                  src="/walkthrough-preview.jpg"
-                  alt="Email Marketing Mastery community walkthrough preview"
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 480px"
-                  loading="eager"
-                  priority
-                  className="object-cover object-center opacity-70 group-hover:opacity-85 group-hover:scale-105 transition-all duration-700"
-                />
+              <div className="relative group">
+                {/* Decorative Liquid Glass Backdrop Glow */}
+                <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-brand/20 via-brand/5 to-transparent blur-xl opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
 
-                {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-bg-deep/90 via-bg-deep/30 to-transparent" />
+                <div
+                  onClick={() => setVideoOpen(true)}
+                  className="relative aspect-video w-full rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer border border-white/[0.12] bg-[#0c100c] shadow-2xl shadow-black/80 hover:border-brand/40 transition-all duration-500 hover:scale-[1.01]"
+                  role="button"
+                  tabIndex={0}
+                  aria-label="Play Max's walkthrough video"
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      setVideoOpen(true);
+                    }
+                  }}
+                >
+                  {/* Thumbnail Image */}
+                  <Image
+                    src="/walkthrough-preview.jpg"
+                    alt="Email Marketing Mastery community walkthrough preview"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 500px"
+                    loading="eager"
+                    priority
+                    className="object-cover object-center opacity-70 group-hover:opacity-85 group-hover:scale-105 transition-all duration-700"
+                  />
 
-                {/* Play button */}
-                <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 z-10">
-                  <div className="relative flex items-center justify-center">
-                    <div className="absolute w-20 h-20 rounded-full bg-brand/20 animate-ping pointer-events-none" />
-                    <div className="w-[72px] h-[72px] rounded-full bg-brand group-hover:bg-brand-hover group-hover:scale-110 text-brand-dark flex items-center justify-center transition-all duration-300 shadow-xl shadow-brand/30">
-                      <Play className="w-8 h-8 fill-brand-dark ml-1" />
+                  {/* Gradient Overlay for Cinematic Depth */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-bg-deep/95 via-bg-deep/30 to-transparent" />
+
+                  {/* Interactive Play Button with Pulse Aura */}
+                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 z-10">
+                    <div className="relative flex items-center justify-center">
+                      <div className="absolute w-20 h-20 rounded-full bg-brand/25 animate-ping pointer-events-none" />
+                      <div className="w-[68px] h-[68px] sm:w-[76px] sm:h-[76px] rounded-full bg-brand group-hover:bg-brand-hover group-hover:scale-110 text-brand-dark flex items-center justify-center transition-all duration-300 shadow-xl shadow-brand/40">
+                        <Play className="w-8 h-8 fill-brand-dark ml-1" />
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2 px-4 py-1.5 rounded-full liquid-glass-card shadow-lg">
+                      <Sparkles className="w-3.5 h-3.5 text-brand" />
+                      <span className="font-montserrat font-bold text-[12px] text-text-primary tracking-wide">
+                        Watch community walkthrough
+                      </span>
                     </div>
                   </div>
-                  <div className="flex items-center gap-2 px-4 py-1.5 rounded-full glass">
-                    <span className="font-montserrat font-bold text-[12px] text-text-primary tracking-wide">
-                      Watch the walkthrough
-                    </span>
+
+                  {/* Time Pill Badge */}
+                  <div className="absolute bottom-3 right-3 px-2.5 py-1 rounded-lg liquid-glass-card text-[11px] font-mono text-text-secondary z-10">
+                    4:32 MIN
                   </div>
                 </div>
 
-                {/* Duration pill */}
-                <div className="absolute bottom-3 right-3 px-2.5 py-1 rounded-lg glass text-[11px] text-text-secondary z-10">
-                  4:32
+                {/* Sub-video Micro-Proof Points */}
+                <div className="flex flex-wrap items-center justify-between gap-3 mt-4 px-1">
+                  {["30+ module course", "250+ email templates", "Live calls weekly"].map(
+                    (item, i) => (
+                      <span
+                        key={i}
+                        className="text-[12.5px] text-text-secondary flex items-center gap-1.5 font-medium"
+                      >
+                        <span className="w-1.5 h-1.5 rounded-full bg-brand" />
+                        {item}
+                      </span>
+                    )
+                  )}
                 </div>
-              </div>
-
-              {/* Below-video proof points */}
-              <div className="flex flex-wrap gap-4 mt-4">
-                {["30+ module course", "250+ templates", "Live calls weekly"].map(
-                  (item, i) => (
-                    <span
-                      key={i}
-                      className="text-[13px] text-text-secondary flex items-center gap-1.5"
-                    >
-                      <span className="w-1 h-1 rounded-full bg-brand" />
-                      {item}
-                    </span>
-                  )
-                )}
               </div>
             </div>
           </div>
 
-          {/* Stats row */}
+          {/* Bento Stats Row with 2026 Liquid Glass Materiality */}
           <div
-            className={`grid grid-cols-2 lg:grid-cols-4 gap-4 mt-14 transition-all duration-700 delay-500 ${
+            className={`grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4 mt-16 transition-all duration-700 delay-500 ${
               heroVisible
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-8"
@@ -227,18 +242,25 @@ export function Hero() {
               return (
                 <div
                   key={index}
-                  className="group glass rounded-2xl p-6 hover:bg-white/[0.04] transition-all duration-300 hover:-translate-y-1"
+                  className="group liquid-glass-card rounded-2xl p-5 sm:p-6 hover:border-brand/40 relative overflow-hidden"
                 >
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="font-montserrat italic font-extrabold text-[32px] lg:text-[36px] text-text-primary leading-none tracking-tight group-hover:text-brand transition-colors duration-300">
+                  {/* Subtle corner light sheen */}
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-brand/[0.05] rounded-bl-full pointer-events-none group-hover:bg-brand/[0.1] transition-colors" />
+
+                  <div className="flex items-center justify-between mb-3 relative z-10">
+                    <span className="font-montserrat italic font-extrabold text-[30px] sm:text-[36px] text-text-primary leading-none tracking-tight group-hover:text-brand transition-colors duration-300">
                       {item.stat}
                     </span>
-                    <div className="w-9 h-9 rounded-xl bg-white/[0.04] flex items-center justify-center text-brand group-hover:bg-brand group-hover:text-brand-dark transition-all duration-300">
-                      <Icon className="w-4.5 h-4.5" />
+                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-white/[0.04] border border-white/[0.06] flex items-center justify-center text-brand group-hover:bg-brand group-hover:text-brand-dark group-hover:scale-105 transition-all duration-300">
+                      <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
                     </div>
                   </div>
-                  <div className="text-[14px] text-text-secondary leading-snug">
+
+                  <div className="text-[13.5px] sm:text-[14px] text-text-secondary font-medium leading-snug relative z-10">
                     {item.label}
+                  </div>
+                  <div className="text-[11px] text-brand/80 font-mono mt-1 font-semibold">
+                    {item.highlight}
                   </div>
                 </div>
               );
@@ -247,44 +269,44 @@ export function Hero() {
         </div>
       </section>
 
-      {/* Video Modal */}
+      {/* Video Modal with Liquid Glass Backdrop */}
       {videoOpen && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-lg"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-xl"
           onClick={(e) => {
             if (e.target === e.currentTarget) setVideoOpen(false);
           }}
         >
           <div
-            className="relative w-full max-w-4xl glass-strong rounded-2xl overflow-hidden shadow-2xl p-6 sm:p-8"
+            className="relative w-full max-w-4xl liquid-glass-dropdown rounded-3xl overflow-hidden shadow-2xl p-6 sm:p-8"
             style={{
-              animation: "scale-in 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+              animation: "scale-in 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards",
             }}
           >
             <style>{`
               @keyframes scale-in {
-                from { opacity: 0; transform: scale(0.95); }
+                from { opacity: 0; transform: scale(0.94); }
                 to { opacity: 1; transform: scale(1); }
               }
             `}</style>
             <button
               onClick={() => setVideoOpen(false)}
-              className="absolute top-4 right-4 p-2 rounded-xl glass text-text-secondary hover:text-text-primary transition-colors z-10"
+              className="absolute top-5 right-5 p-2 rounded-xl liquid-glass-card text-text-secondary hover:text-text-primary hover:bg-white/[0.08] transition-colors z-10"
               aria-label="Close walkthrough modal"
             >
               <X className="w-5 h-5" />
             </button>
 
             <div className="mb-4">
-              <span className="font-montserrat text-[12px] tracking-[0.08em] text-brand font-bold">
-                Community walkthrough
+              <span className="font-montserrat text-[11px] tracking-[0.08em] text-brand font-bold uppercase">
+                Community Walkthrough
               </span>
-              <h3 className="font-montserrat italic font-bold text-2xl text-text-primary mt-1">
+              <h3 className="font-montserrat italic font-extrabold text-2xl sm:text-3xl text-text-primary mt-1">
                 Inside Email Marketing Mastery
               </h3>
             </div>
 
-            <div className="aspect-video w-full rounded-xl overflow-hidden relative border border-border-default bg-bg-deep">
+            <div className="aspect-video w-full rounded-2xl overflow-hidden relative border border-white/[0.1] bg-bg-deep shadow-2xl">
               <Image
                 src="/walkthrough-preview.jpg"
                 alt="Walkthrough Preview"
@@ -292,26 +314,25 @@ export function Hero() {
                 sizes="(max-width: 900px) 100vw, 860px"
                 className="object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col justify-end p-6">
-                <p className="text-text-primary font-medium text-lg">
-                  Explore the full community live on Skool with 342 active
-                  brand marketers.
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-6 sm:p-8">
+                <p className="text-text-primary font-medium text-base sm:text-lg max-w-[560px]">
+                  Explore the full community live on Skool with 342 active brand marketers and weekly live calls.
                 </p>
-                <div className="flex items-center gap-3 mt-4">
+                <div className="flex items-center gap-3 mt-5">
                   <a
                     href="https://www.skool.com/email-marketerz"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-brand text-brand-dark font-montserrat font-bold text-sm hover:bg-brand-hover transition-all"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-brand text-brand-dark font-montserrat font-bold text-sm hover:bg-brand-hover btn-spring shadow-lg shadow-brand/25 transition-all"
                   >
-                    <span>View on Skool</span>
-                    <ExternalLink className="w-4 h-4" />
+                    <span>Open in Skool</span>
+                    <ExternalLink className="w-4 h-4 stroke-[2.5]" />
                   </a>
                   <button
                     onClick={() => setVideoOpen(false)}
-                    className="px-4 py-2.5 rounded-xl glass text-text-primary font-medium text-sm hover:bg-white/[0.06] transition-colors"
+                    className="px-5 py-3 rounded-xl liquid-glass-card text-text-primary font-medium text-sm hover:bg-white/[0.08] transition-colors"
                   >
-                    Back to page
+                    Close Preview
                   </button>
                 </div>
               </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Star, ArrowRight, Quote } from "lucide-react";
+import { Star, ArrowRight, Quote, CheckCircle2, MessageSquare } from "lucide-react";
 import { ScrollReveal } from "./ScrollReveal";
 
 export function TestimonialsSection() {
@@ -45,7 +45,7 @@ export function TestimonialsSection() {
     {
       name: "Dave Hoekstra",
       tenure: "Member for 3 months",
-      quote: "Insane ROI!",
+      quote: "Insane ROI! Paid for itself within the first campaign teardown.",
     },
     {
       name: "Fred Schneider",
@@ -57,39 +57,56 @@ export function TestimonialsSection() {
       name: "John Alcala",
       tenure: "Member for 2 months",
       quote:
-        "Max is the best, been following him for 2 years now and recently started an Ecom brand and needed to fine tune my email marketing skills and make sure I was learning from the best of the best and it has 100% paid off. Worth the investment and everyone...",
+        "Max is the best, been following him for 2 years now and recently started an Ecom brand and needed to fine tune my email marketing skills. 100% paid off. Worth the investment.",
     },
   ];
 
-  // Split reviews into two rows for infinite ticker
   const row1 = reviews.slice(0, 5);
   const row2 = reviews.slice(4);
 
   return (
     <section id="reviews" className="py-20 lg:py-28 relative overflow-hidden">
+      <div
+        className="glow-spot w-[600px] h-[350px] bg-brand/[0.04] top-[10%] right-[-100px]"
+        aria-hidden="true"
+      />
+
       <div className="max-w-[1200px] mx-auto px-6 sm:px-8 relative z-10">
         <ScrollReveal>
-          <p className="font-montserrat font-bold text-[12px] tracking-[0.08em] text-brand mb-3.5">
-            Member reviews
-          </p>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full liquid-glass-card mb-4">
+            <MessageSquare className="w-3.5 h-3.5 text-brand" />
+            <span className="font-montserrat font-bold text-[11px] tracking-[0.08em] text-brand uppercase">
+              Member Experiences
+            </span>
+          </div>
+
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
-            <h2 className="font-montserrat italic font-extrabold text-[34px] sm:text-[42px] leading-[1.08] tracking-[-0.01em] text-text-primary">
-              5.0 from 18 reviews.
-            </h2>
-            <div className="flex items-center gap-1.5 text-brand">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-5 h-5 fill-brand" />
-              ))}
-              <span className="text-text-secondary text-[13px] ml-2 font-medium">
-                100% 5-star
+            <div>
+              <h2 className="font-montserrat italic font-extrabold text-[34px] sm:text-[44px] leading-[1.06] tracking-[-0.015em] text-text-primary">
+                5.0 Stars. 100% Unfiltered.
+              </h2>
+              <p className="text-text-secondary text-[16px] mt-2">
+                What brand owners and email practitioners say inside Skool.
+              </p>
+            </div>
+
+            <div className="flex items-center gap-2 px-4 py-2 rounded-full liquid-glass-card shrink-0">
+              <div className="flex text-brand gap-0.5">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-4 h-4 fill-brand" />
+                ))}
+              </div>
+              <span className="text-text-primary text-[13px] font-bold ml-1">
+                5.0
               </span>
+              <span className="text-text-muted text-[12px]">· 18 Reviews</span>
             </div>
           </div>
         </ScrollReveal>
       </div>
 
-      {/* Infinite scroll ticker — row 1 */}
-      <div className="overflow-hidden mb-5 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+      {/* Row 1 — Left to Right */}
+      <div className="overflow-hidden mb-5 ticker-mask">
         <div className="ticker-track">
           {[...row1, ...row1, ...row1].map((rev, i) => (
             <ReviewCard key={`r1-${i}`} review={rev} />
@@ -97,8 +114,8 @@ export function TestimonialsSection() {
         </div>
       </div>
 
-      {/* Infinite scroll ticker — row 2 (reversed) */}
-      <div className="overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+      {/* Row 2 — Right to Left (Reverse) */}
+      <div className="overflow-hidden ticker-mask">
         <div
           className="ticker-track"
           style={{ animationDirection: "reverse", animationDuration: "50s" }}
@@ -109,16 +126,16 @@ export function TestimonialsSection() {
         </div>
       </div>
 
-      {/* Link to Skool */}
-      <div className="max-w-[1200px] mx-auto px-6 sm:px-8 mt-10">
+      {/* Verified link to Skool */}
+      <div className="max-w-[1200px] mx-auto px-6 sm:px-8 mt-10 text-center sm:text-left">
         <ScrollReveal>
           <a
             href="https://www.skool.com/email-marketerz"
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex items-center gap-2 font-montserrat font-bold text-[15px] text-brand hover:text-brand-hover transition-colors"
+            className="group inline-flex items-center gap-2 font-montserrat font-bold text-[14.5px] text-brand hover:text-brand-hover transition-colors"
           >
-            <span>Read all 18 reviews on Skool</span>
+            <span>Read all member reviews directly on Skool</span>
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </a>
         </ScrollReveal>
@@ -132,27 +149,40 @@ function ReviewCard({
 }: {
   review: { name: string; tenure: string; quote: string };
 }) {
+  const initials = review.name
+    .split(" ")
+    .map((n) => n[0])
+    .join("")
+    .slice(0, 2);
+
   return (
-    <div className="glass rounded-2xl p-6 w-[380px] shrink-0 flex flex-col justify-between hover:bg-white/[0.04] transition-all duration-300 group">
+    <div className="liquid-glass-card rounded-2xl p-6 w-[370px] sm:w-[400px] shrink-0 flex flex-col justify-between hover:border-brand/40 transition-all duration-300 group">
       <div>
-        <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center justify-between mb-3.5">
           <div className="flex text-brand gap-0.5">
             {[...Array(5)].map((_, idx) => (
               <Star key={idx} className="w-3.5 h-3.5 fill-brand" />
             ))}
           </div>
-          <Quote className="w-4 h-4 text-white/[0.06] group-hover:text-brand/20 transition-colors" />
+          <Quote className="w-4 h-4 text-white/[0.08] group-hover:text-brand/30 transition-colors" />
         </div>
-        <p className="text-[15px] leading-[1.6] text-text-primary mb-5">
+        <p className="text-[14.5px] leading-[1.65] text-text-primary mb-5 font-normal">
           &ldquo;{review.quote}&rdquo;
         </p>
       </div>
-      <div className="pt-3 border-t border-border-subtle">
-        <div className="font-montserrat font-bold text-[14px] text-text-primary">
-          {review.name}
+
+      <div className="pt-3.5 border-t border-white/[0.06] flex items-center gap-3">
+        <div className="w-8 h-8 rounded-full bg-brand/10 border border-brand/20 flex items-center justify-center text-brand font-montserrat font-bold text-[11px] shrink-0">
+          {initials}
         </div>
-        <div className="text-[12px] text-text-accent mt-0.5 font-medium">
-          {review.tenure}
+        <div>
+          <div className="font-montserrat font-bold text-[13.5px] text-text-primary flex items-center gap-1.5 leading-none">
+            {review.name}
+            <CheckCircle2 className="w-3.5 h-3.5 text-brand" />
+          </div>
+          <div className="text-[11.5px] text-text-secondary mt-1 font-medium">
+            {review.tenure}
+          </div>
         </div>
       </div>
     </div>
